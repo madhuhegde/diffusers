@@ -137,14 +137,14 @@ class VQModel(ModelMixin, ConfigMixin):
     ) -> Union[DecoderOutput, torch.FloatTensor]:
         # also go through quantization layer
         if not force_not_quantize:
-            quant, _, _ = self.quantize(h)
+            quant, loss, _ = self.quantize(h)
         else:
             quant = h
         quant2 = self.post_quant_conv(quant)
         dec = self.decoder(quant2, quant if self.config.norm_type == "spatial" else None)
 
         if not return_dict:
-            return (dec,)
+            return dec,loss
 
         return DecoderOutput(sample=dec)
 
@@ -166,9 +166,9 @@ class VQModel(ModelMixin, ConfigMixin):
         """
 
         h = self.encode(sample).latents
-        dec = self.decode(h).sample
+        dec,loss = self.decode(h).sample
 
         if not return_dict:
-            return (dec,)
+            return (dec,loss)
 
         return DecoderOutput(sample=dec)
