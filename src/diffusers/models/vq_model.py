@@ -166,7 +166,7 @@ class VQModel(ModelMixin, ConfigMixin):
         """
 
         h = self.encode(sample).latents
-        dec,loss = self.decode(h).sample
+        dec,loss = self.decode(h,return_dict=return_dict).sample
 
         if not return_dict:
             return (dec,loss)
