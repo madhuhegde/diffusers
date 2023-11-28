@@ -133,8 +133,8 @@ class VQModel(ModelMixin, ConfigMixin):
 
     @apply_forward_hook
     def decode(
-        self, h: torch.FloatTensor, force_not_quantize: bool = False, return_dict: bool = True
-    ) -> Union[DecoderOutput, torch.FloatTensor]:
+        self, h: torch.FloatTensor, force_not_quantize: bool = False, return_dict: bool = True):
+    #) -> Union[DecoderOutput, torch.FloatTensor]:
         # also go through quantization layer
         if not force_not_quantize:
             quant, loss, _ = self.quantize(h)
@@ -143,10 +143,10 @@ class VQModel(ModelMixin, ConfigMixin):
         quant2 = self.post_quant_conv(quant)
         dec = self.decoder(quant2, quant if self.config.norm_type == "spatial" else None)
 
-        if not return_dict:
-            return dec,loss
+        #if not return_dict:
+        return (dec,loss)
 
-        return DecoderOutput(sample=dec)
+        #return DecoderOutput(sample=dec)
 
     def forward(
         self, sample: torch.FloatTensor, return_dict: bool = True
@@ -166,9 +166,9 @@ class VQModel(ModelMixin, ConfigMixin):
         """
 
         h = self.encode(sample).latents
-        dec,loss = self.decode(h,return_dict=return_dict).sample
+        dec,loss = self.decode(h).sample
 
-        if not return_dict:
-            return (dec,loss)
+        #if not return_dict:
+        return (dec,loss)
 
-        return DecoderOutput(sample=dec)
+        #return DecoderOutput(sample=dec)
