@@ -171,7 +171,7 @@ class VQModel(ModelMixin, ConfigMixin):
         if not return_dict:
             return (dec,)
 			
-	    return DecoderOutput(sample=dec)		
+	      return DecoderOutput(sample=dec)		
 
     #@apply_forward_hook
     def decode_with_loss(
