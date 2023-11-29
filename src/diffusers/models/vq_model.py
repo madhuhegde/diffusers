@@ -175,7 +175,7 @@ class VQModel(ModelMixin, ConfigMixin):
 
     #@apply_forward_hook
     def decode_with_loss(
-        self, h: torch.FloatTensor, force_not_quantize: bool = False, return_dict: bool = True
+        self, h: torch.FloatTensor, force_not_quantize: bool = False
     ) -> Tuple[torch.FloatTensor, torch.FloatTensor]:
         # also go through quantization layer
         if not force_not_quantize:
@@ -191,20 +191,16 @@ class VQModel(ModelMixin, ConfigMixin):
         
 
     def train(
-        self, sample: torch.FloatTensor, return_dict: bool = True
+        self, sample: torch.FloatTensor
     ) -> Tuple[torch.FloatTensor, torch.FloatTensor]:
         r"""
         The [`VQModel`] train method.
 
         Args:
             sample (`torch.FloatTensor`): Input sample.
-            return_dict (`bool`, *optional*, defaults to `True`):
-                Whether or not to return a [`models.vq_model.VQEncoderOutput`] instead of a plain tuple.
-
+            
         Returns:
-            [`~models.vq_model.VQEncoderOutput`] or `tuple`:
-                If return_dict is True, a [`~models.vq_model.VQEncoderOutput`] is returned, otherwise a plain `tuple`
-                is returned.
+            decoder output, loss.
         """
 
         h = self.encode(sample).latents
