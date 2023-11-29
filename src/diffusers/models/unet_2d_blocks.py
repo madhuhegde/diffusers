@@ -1306,6 +1306,7 @@ class DownEncoderBlock2D(nn.Module):
             )
 
         self.resnets = nn.ModuleList(resnets)
+        print(self.resnets)
 
         if add_downsample:
             self.downsamplers = nn.ModuleList(
