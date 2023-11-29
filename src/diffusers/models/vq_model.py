@@ -91,6 +91,7 @@ class VQModel(ModelMixin, ConfigMixin):
     ):
         super().__init__()
 
+        print(down_block_types)
         # pass init params to Encoder
         self.encoder = Encoder(
             in_channels=in_channels,
@@ -109,6 +110,7 @@ class VQModel(ModelMixin, ConfigMixin):
         self.quantize = VectorQuantizer(num_vq_embeddings, vq_embed_dim, beta=0.25, remap=None, sane_index_shape=False)
         self.post_quant_conv = nn.Conv2d(vq_embed_dim, latent_channels, 1)
 
+        print(up_block_types)
         # pass init params to Decoder
         self.decoder = Decoder(
             in_channels=latent_channels,
