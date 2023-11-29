@@ -131,26 +131,26 @@ class VQModel(ModelMixin, ConfigMixin):
 
         return VQEncoderOutput(latents=h)
 
-    #@apply_forward_hook
+    @apply_forward_hook
     def decode(
-        self, h: torch.FloatTensor, force_not_quantize: bool = False, return_dict: bool = True):
-    #) -> Union[DecoderOutput, torch.FloatTensor]:
+        self, h: torch.FloatTensor, force_not_quantize: bool = False, return_dict: bool = True
+    ) -> Union[DecoderOutput, torch.FloatTensor]:
         # also go through quantization layer
         if not force_not_quantize:
-            quant, loss, _ = self.quantize(h)
+            quant, _, _ = self.quantize(h)
         else:
             quant = h
         quant2 = self.post_quant_conv(quant)
         dec = self.decoder(quant2, quant if self.config.norm_type == "spatial" else None)
 
-        #if not return_dict:
-        return (dec,loss)
+        if not return_dict:
+            return (dec,)
 
-        #return DecoderOutput(sample=dec)
+        return DecoderOutput(sample=dec)
 
     def forward(
-        self, sample: torch.FloatTensor, return_dict: bool = True):
-    #) -> Union[DecoderOutput, Tuple[torch.FloatTensor, ...]]:
+        self, sample: torch.FloatTensor, return_dict: bool = True
+    ) -> Union[DecoderOutput, Tuple[torch.FloatTensor, ...]]:
         r"""
         The [`VQModel`] forward method.
 
@@ -166,9 +166,50 @@ class VQModel(ModelMixin, ConfigMixin):
         """
 
         h = self.encode(sample).latents
-        dec,loss = self.decode(h)
+        dec = self.decode(h).sample
+
+        if not return_dict:
+            return (dec,)
+			
+	    return DecoderOutput(sample=dec)		
+
+    #@apply_forward_hook
+    def decode_with_loss(
+        self, h: torch.FloatTensor, force_not_quantize: bool = False, return_dict: bool = True
+    ) -> Tuple[torch.FloatTensor, torch.FloatTensor]:
+        # also go through quantization layer
+        if not force_not_quantize:
+            quant, loss, _ = self.quantize(h)
+        else:
+            quant = h
+        quant2 = self.post_quant_conv(quant)
+        dec = self.decoder(quant2, quant if self.config.norm_type == "spatial" else None)
 
         #if not return_dict:
         return (dec,loss)
 
-        #return DecoderOutput(sample=dec)
+        
+
+    def train(
+        self, sample: torch.FloatTensor, return_dict: bool = True
+    ) -> Tuple[torch.FloatTensor, torch.FloatTensor]:
+        r"""
+        The [`VQModel`] train method.
+
+        Args:
+            sample (`torch.FloatTensor`): Input sample.
+            return_dict (`bool`, *optional*, defaults to `True`):
+                Whether or not to return a [`models.vq_model.VQEncoderOutput`] instead of a plain tuple.
+
+        Returns:
+            [`~models.vq_model.VQEncoderOutput`] or `tuple`:
+                If return_dict is True, a [`~models.vq_model.VQEncoderOutput`] is returned, otherwise a plain `tuple`
+                is returned.
+        """
+
+        h = self.encode(sample).latents
+        dec,loss = self.decode_with_loss(h)
+
+        #if not return_dict:
+        return (dec,loss)
+        
