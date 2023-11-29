@@ -91,7 +91,20 @@ class VQModel(ModelMixin, ConfigMixin):
     ):
         super().__init__()
 
-        print(down_block_types)
+        print(down_block_types, 
+             in_channels,
+             out_channels,
+             up_block_types,
+             block_out_channels,
+             layers_per_block,
+             act_fn,
+             latent_channels,
+             sample_size,
+             num_vq_embeddings,
+             norm_num_groups,
+             vq_embed_dim,
+             scaling_factor,
+             norm_type)
         # pass init params to Encoder
         self.encoder = Encoder(
             in_channels=in_channels,
