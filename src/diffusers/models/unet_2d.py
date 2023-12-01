@@ -88,7 +88,7 @@ class UNet2DModel(ModelMixin, ConfigMixin):
             Input dimension of the learnable embedding matrix to be projected to `time_embed_dim` when performing class
             conditioning with `class_embed_type` equal to `None`.
     """
-
+ 
     @register_to_config
     def __init__(
         self,
@@ -242,7 +242,8 @@ class UNet2DModel(ModelMixin, ConfigMixin):
 
         print(f"{sample_size=},
                 {in_channels=},
-                {out_channels=},
+                {out_channels=}")
+#if 0        
                 {center_input_sample=},
                 {time_embedding_type=},
                 {freq_shift=},
@@ -266,7 +267,7 @@ class UNet2DModel(ModelMixin, ConfigMixin):
                 {class_embed_type=},
                 {num_class_embeds=},
                 {num_train_timesteps=}")
-
+#endif
     def forward(
         self,
         sample: torch.FloatTensor,
