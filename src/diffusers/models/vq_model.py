@@ -106,20 +106,20 @@ class VQModel(ModelMixin, ConfigMixin):
 
         vq_embed_dim = vq_embed_dim if vq_embed_dim is not None else latent_channels
 
-        print(down_block_types, 
-             in_channels,
-             out_channels,
-             up_block_types,
-             block_out_channels,
-             layers_per_block,
-             act_fn,
-             latent_channels,
-             sample_size,
-             num_vq_embeddings,
-             norm_num_groups,
-             vq_embed_dim,
-             scaling_factor,
-             norm_type)
+        print(f"down_block_types = {down_block_types},  
+             in_channels = {in_channels},       
+             out_channels = {out_channels},      
+             up_block_types= {up_block_types},    
+             block_out_channels= {block_out_channels},
+             layers_per_block = {layers_per_block},  
+             act_fn = {act_fn},            
+             latent_channels = {latent_channels},   
+             sample_size = {sample_size},       
+             num_vq_embeddings = {num_vq_embeddings}, 
+             norm_num_groups = {norm_num_groups},   
+             vq_embed_dim = {vq_embed_dim},      
+             scaling_factor = {scaling_factor},    
+             norm_type = {norm_type}")
 
         self.quant_conv = nn.Conv2d(latent_channels, vq_embed_dim, 1)
         self.quantize = VectorQuantizer(num_vq_embeddings, vq_embed_dim, beta=0.25, remap=None, sane_index_shape=False)
