@@ -150,7 +150,7 @@ class Upsample2D(nn.Module):
         self.use_conv = use_conv
         self.use_conv_transpose = use_conv_transpose
         self.name = name
-        conv_cls = nn.Conv2d #if USE_PEFT_BACKEND else LoRACompatibleConv
+        conv_cls = nn.Conv2d if USE_PEFT_BACKEND else LoRACompatibleConv
 
         conv = None
         if use_conv_transpose:
@@ -241,7 +241,7 @@ class Downsample2D(nn.Module):
         self.padding = padding
         stride = 2
         self.name = name
-        conv_cls = nn.Conv2d # if USE_PEFT_BACKEND else LoRACompatibleConv
+        conv_cls = nn.Conv2d if USE_PEFT_BACKEND else LoRACompatibleConv
 
         if use_conv:
             conv = conv_cls(self.channels, self.out_channels, 3, stride=stride, padding=padding)
@@ -627,7 +627,7 @@ class ResnetBlock2D(nn.Module):
         self.time_embedding_norm = time_embedding_norm
         self.skip_time_act = skip_time_act
 
-        linear_cls = nn.Linear # if USE_PEFT_BACKEND else LoRACompatibleLinear
+        linear_cls = nn.Linear if USE_PEFT_BACKEND else LoRACompatibleLinear
         conv_cls = nn.Conv2d #if USE_PEFT_BACKEND else LoRACompatibleConv
 
         if groups_out is None:
