@@ -63,7 +63,7 @@ class LDMSuperResolutionPipeline(DiffusionPipeline):
     ):
         super().__init__()
         self.register_modules(vqvae=vqvae, unet=unet, scheduler=scheduler)
-        print(scheduler)
+        print(f"scheduler : {scheduler}")
         
 
     @torch.no_grad()
