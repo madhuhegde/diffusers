@@ -242,7 +242,7 @@ class UNet2DModel(ModelMixin, ConfigMixin):
 
         print(f"{sample_size=},
               {in_channels=},
-              {out_channels=})
+              {out_channels=}")
 
     def forward(
         self,
