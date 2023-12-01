@@ -628,7 +628,7 @@ class ResnetBlock2D(nn.Module):
         self.skip_time_act = skip_time_act
 
         linear_cls = nn.Linear if USE_PEFT_BACKEND else LoRACompatibleLinear
-        conv_cls = nn.Conv2d #if USE_PEFT_BACKEND else LoRACompatibleConv
+        conv_cls = nn.Conv2d if USE_PEFT_BACKEND else LoRACompatibleConv
 
         if groups_out is None:
             groups_out = groups
