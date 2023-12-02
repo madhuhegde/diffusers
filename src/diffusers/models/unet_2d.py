@@ -241,7 +241,7 @@ class UNet2DModel(ModelMixin, ConfigMixin):
         self.conv_out = nn.Conv2d(block_out_channels[0], out_channels, kernel_size=3, padding=1)
 
         print("sample_size={}, in_channels={},out_channels={}, center_input_sample={},time_embedding_type={},freq_shift={},flip_sin_to_cos={}".format(sample_size,in_channels, out_channels, center_input_sample,time_embedding_type,freq_shift,flip_sin_to_cos))
-
+        print("down_block_types={},up_block_types={}, block_out_channels={},layers_per_block={},mid_block_scale_factor={},downsample_padding={},downsample_type={},upsample_type={},dropout={},act_fn={}".format(down_block_types,up_block_types, block_out_channels,layers_per_block,mid_block_scale_factor,downsample_padding,downsample_type,upsample_type,dropout,act_fn))
     def forward(
         self,
         sample: torch.FloatTensor,
