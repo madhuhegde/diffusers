@@ -240,7 +240,11 @@ class UNet2DModel(ModelMixin, ConfigMixin):
         self.conv_act = nn.SiLU()
         self.conv_out = nn.Conv2d(block_out_channels[0], out_channels, kernel_size=3, padding=1)
 
-        print("sample_size={},in_channels={}, out_channels={}".format(sample_size,in_channels, out_channels))
+        print("sample_size={},
+              in_channels={}, 
+              out_channels={}".format(sample_size,
+                                      in_channels,
+                                      out_channels))
 
     def forward(
         self,
