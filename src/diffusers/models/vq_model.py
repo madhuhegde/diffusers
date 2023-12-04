@@ -105,8 +105,8 @@ class VQModel(ModelMixin, ConfigMixin):
         )
 
         vq_embed_dim = vq_embed_dim if vq_embed_dim is not None else latent_channels
-
-        print(f"down_block_types = {down_block_types},  
+        if 0:
+             print(f"down_block_types = {down_block_types},  
              in_channels = {in_channels},       
              out_channels = {out_channels},      
              up_block_types= {up_block_types},    
