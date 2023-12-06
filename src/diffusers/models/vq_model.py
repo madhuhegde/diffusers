@@ -111,6 +111,9 @@ class VQModel(ModelMixin, ConfigMixin):
         self.quantize = VectorQuantizer(num_vq_embeddings, vq_embed_dim, beta=0.25, remap=None, sane_index_shape=False)
         self.post_quant_conv = nn.Conv2d(vq_embed_dim, latent_channels, 1)
 
+        print("down_block_types={},in_channels={},out_channels={},up_block_types={}, block_out_channels={}, layers_per_block={}, act_fn={},latent_channels={}".format(down_block_types={},in_channels={},out_channels={},up_block_types={}, block_out_channels={}, layers_per_block={}, act_fn={},latent_channels))
+        print("latent_channels={}, sample_size={},num_vq_embeddings={}, norm_num_groups={}, vq_embed_dim ={},scaling_factor={},norm_type={}".format(latent_channels, sample_size,num_vq_embeddings, norm_num_groups, vq_embed_dim,scaling_factor,norm_type)) 
+      
      
         # pass init params to Decoder
         self.decoder = Decoder(
@@ -123,6 +126,8 @@ class VQModel(ModelMixin, ConfigMixin):
             norm_num_groups=norm_num_groups,
             norm_type=norm_type,
         )
+
+        
 
     @apply_forward_hook
     def encode(self, x: torch.FloatTensor, return_dict: bool = True) -> VQEncoderOutput:
