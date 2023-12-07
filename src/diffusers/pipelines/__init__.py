@@ -13,7 +13,7 @@ from ..utils import (
     is_torch_available,
     is_transformers_available,
 )
-
+from .latent_diffusion import LDMSuperResolutionPipeline
 
 # These modules contain pipelines from multiple libraries/frameworks
 _dummy_objects = {}
@@ -116,7 +116,7 @@ else:
         "LatentConsistencyModelPipeline",
     ]
     _import_structure["latent_diffusion"].extend(["LDMTextToImagePipeline"])
-    _import_structure["latent_diffusion"].extend(["LDMSuperResolutionPipeline"])
+   
     _import_structure["musicldm"] = ["MusicLDMPipeline"]
     _import_structure["paint_by_example"] = ["PaintByExamplePipeline"]
     _import_structure["pixart_alpha"] = ["PixArtAlphaPipeline"]
