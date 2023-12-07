@@ -12,6 +12,8 @@ from ...utils import (
 
 _dummy_objects = {}
 _import_structure = {}
+_import_structure["pipeline_latent_diffusion_superresolution"] = ["LDMSuperResolutionPipeline"]
+from .pipeline_latent_diffusion_superresolution import LDMSuperResolutionPipeline
 
 try:
     if not (is_transformers_available() and is_torch_available()):
