@@ -50,11 +50,11 @@ class LDMSRPipelineCompact(DiffusionPipeline):
 
     def __init__(
         self,
-       # vqvae: VQModel,
+        vqvae: VQModel,
         
     ):
         super().__init__()
-        #self.register_modules(vqvae=vqvae)
+        self.register_modules(vqvae=vqvae)
              
 
     @torch.no_grad()
