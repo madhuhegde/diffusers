@@ -13,7 +13,7 @@ from ..utils import (
     is_torch_available,
     is_transformers_available,
 )
-from .latent_diffusion import LDMSuperResolutionPipeline
+from .latent_diffusion import LDMSuperResolutionPipeline, LDMSRPipelineCompact
 
 # These modules contain pipelines from multiple libraries/frameworks
 _dummy_objects = {}
@@ -37,7 +37,7 @@ else:
     _import_structure["ddim"] = ["DDIMPipeline"]
     _import_structure["ddpm"] = ["DDPMPipeline"]
     _import_structure["dit"] = ["DiTPipeline"]
-    _import_structure["latent_diffusion"].extend(["LDMSuperResolutionPipeline"])
+    _import_structure["latent_diffusion"].extend(["LDMSuperResolutionPipeline", "LDMSRPipelineCompact"])
     _import_structure["latent_diffusion_uncond"] = ["LDMPipeline"]
     _import_structure["pipeline_utils"] = ["AudioPipelineOutput", "DiffusionPipeline", "ImagePipelineOutput"]
     _import_structure["pndm"] = ["PNDMPipeline"]
@@ -275,7 +275,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
         from .ddim import DDIMPipeline
         from .ddpm import DDPMPipeline
         from .dit import DiTPipeline
-        from .latent_diffusion import LDMSuperResolutionPipeline
+        from .latent_diffusion import LDMSuperResolutionPipeline, LDMSRPipelineCompact
         from .latent_diffusion_uncond import LDMPipeline
         from .pipeline_utils import AudioPipelineOutput, DiffusionPipeline, ImagePipelineOutput
         from .pndm import PNDMPipeline
