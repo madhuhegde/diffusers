@@ -36,7 +36,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
         from ...utils.dummy_torch_and_transformers_objects import *
     else:
         from .pipeline_latent_diffusion import LDMBertModel, LDMTextToImagePipeline
-        from .pipeline_latent_diffusion_superresolution import LDMSuperResolutionPipeline
+        from .pipeline_latent_diffusion_superresolution import LDMSuperResolutionPipeline, LDMSRPipelineCompact
 
 else:
     import sys
