@@ -24,7 +24,7 @@ except OptionalDependencyNotAvailable:
     _dummy_objects.update(get_objects_from_module(dummy_torch_and_transformers_objects))
 else:
     _import_structure["pipeline_latent_diffusion"] = ["LDMBertModel", "LDMTextToImagePipeline"]
-    _import_structure["pipeline_latent_diffusion_superresolution"] = ["LDMSuperResolutionPipeline"]
+    _import_structure["pipeline_latent_diffusion_superresolution"] = ["LDMSuperResolutionPipeline", "LDMSRPipelineCompact"]
 
 
 if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
