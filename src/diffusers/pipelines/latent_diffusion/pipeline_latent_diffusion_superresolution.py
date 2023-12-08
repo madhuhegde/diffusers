@@ -50,10 +50,12 @@ class LDMSRPipelineCompact(DiffusionPipeline):
 
     def __init__(
         self,
-        vqvae: VQModel,
+        #vqvae: VQModel,
         
     ):
         super().__init__()
+
+        vqvae = VQModel(in_channels=3,out_channels=3,down_block_types=['DownEncoderBlock2D', 'DownEncoderBlock2D', 'DownEncoderBlock2D'],up_block_types=['UpDecoderBlock2D', 'UpDecoderBlock2D', 'UpDecoderBlock2D'], block_out_channels=[128, 256, 512], layers_per_block=2, act_fn='silu',latent_channels=3, latent_channels=3, sample_size=256,num_vq_embeddings=8192, norm_num_groups=32, vq_embed_dim =3,scaling_factor=0.18215,norm_type='group')
         self.register_modules(vqvae=vqvae)
              
 
