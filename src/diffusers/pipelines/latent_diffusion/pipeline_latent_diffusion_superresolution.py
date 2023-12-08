@@ -30,7 +30,7 @@ def preprocess(image):
     return 2.0 * image - 1.0
 
 
-class LDMSuperResolutionPipeline(DiffusionPipeline):
+class LDMSRPipelineCompact(DiffusionPipeline):
     r"""
     A pipeline for image super-resolution using latent diffusion.
 
@@ -51,20 +51,11 @@ class LDMSuperResolutionPipeline(DiffusionPipeline):
     def __init__(
         self,
         vqvae: VQModel,
-        unet: UNet2DModel,
-        scheduler: Union[
-            DDIMScheduler,
-            PNDMScheduler,
-            LMSDiscreteScheduler,
-            EulerDiscreteScheduler,
-            EulerAncestralDiscreteScheduler,
-            DPMSolverMultistepScheduler,
-        ],
+        
     ):
         super().__init__()
-        self.register_modules(vqvae=vqvae, unet=unet, scheduler=scheduler)
-        print(f"scheduler : {scheduler}")
-        
+        self.register_modules(vqvae=vqvae)
+             
 
     @torch.no_grad()
     def __call__(
@@ -143,41 +134,11 @@ class LDMSuperResolutionPipeline(DiffusionPipeline):
 
         height, width = image.shape[-2:]
 
-        # in_channels should be 6: 3 for latents, 3 for low resolution image
-        latents_shape = (batch_size, self.unet.config.in_channels // 2, height, width)
-        latents_dtype = next(self.unet.parameters()).dtype
+        image = image.to(device=self.device)
 
-        latents = randn_tensor(latents_shape, generator=generator, device=self.device, dtype=latents_dtype)
-
-        image = image.to(device=self.device, dtype=latents_dtype)
-
-        # set timesteps and move to the correct device
-        self.scheduler.set_timesteps(num_inference_steps, device=self.device)
-        timesteps_tensor = self.scheduler.timesteps
-
-        # scale the initial noise by the standard deviation required by the scheduler
-        latents = latents * self.scheduler.init_noise_sigma
-
-        # prepare extra kwargs for the scheduler step, since not all schedulers have the same signature.
-        # eta (η) is only used with the DDIMScheduler, it will be ignored for other schedulers.
-        # eta corresponds to η in DDIM paper: https://arxiv.org/abs/2010.02502
-        # and should be between [0, 1]
-        accepts_eta = "eta" in set(inspect.signature(self.scheduler.step).parameters.keys())
-        extra_kwargs = {}
-        if accepts_eta:
-            extra_kwargs["eta"] = eta
-
-        for t in self.progress_bar(timesteps_tensor):
-            # concat latents and low resolution image in the channel dimension.
-            latents_input = torch.cat([latents, image], dim=1)
-            latents_input = self.scheduler.scale_model_input(latents_input, t)
-            # predict the noise residual
-            noise_pred = self.unet(latents_input, t).sample
-            # compute the previous noisy sample x_t -> x_t-1
-            latents = self.scheduler.step(noise_pred, t, latents, **extra_kwargs).prev_sample
-
+       
         # decode the image latents with the VQVAE
-        image = self.vqvae.decode(latents).sample
+        image = self.vqvae(image).sample
         image = torch.clamp(image, -1.0, 1.0)
         image = image / 2 + 0.5
         image = image.cpu().permute(0, 2, 3, 1).numpy()
@@ -190,7 +151,7 @@ class LDMSuperResolutionPipeline(DiffusionPipeline):
 
         return ImagePipelineOutput(images=image)
 
-class LDMSRPipelineCompact(DiffusionPipeline):
+class LDMSuperResolutionPipeline(DiffusionPipeline):
     r"""
     A pipeline for image super-resolution using latent diffusion.
 
