@@ -12,7 +12,7 @@ from ...utils import (
 
 _dummy_objects = {}
 _import_structure = {}
-_import_structure["pipeline_latent_diffusion_superresolution"] = ["LDMSuperResolutionPipeline"]
+_import_structure["pipeline_latent_diffusion_superresolution"] = ["LDMSuperResolutionPipeline", "LDMSRPipelineCompact"]
 from .pipeline_latent_diffusion_superresolution import LDMSuperResolutionPipeline
 
 try:
