@@ -19,7 +19,7 @@ from .latent_diffusion import LDMSRPipelineCompact
 # These modules contain pipelines from multiple libraries/frameworks
 _dummy_objects = {}
 _import_structure = {"stable_diffusion": [], "stable_diffusion_xl": [], "latent_diffusion": [], "controlnet": []}
-
+_import_structure["latent_diffusion"].extend(["LDMSuperResolutionPipeline", "LDMSRPipelineCompact"])
 try:
     if not is_torch_available():
         raise OptionalDependencyNotAvailable()
@@ -38,7 +38,7 @@ else:
     _import_structure["ddim"] = ["DDIMPipeline"]
     _import_structure["ddpm"] = ["DDPMPipeline"]
     _import_structure["dit"] = ["DiTPipeline"]
-    _import_structure["latent_diffusion"].extend(["LDMSuperResolutionPipeline", "LDMSRPipelineCompact"])
+    #_import_structure["latent_diffusion"].extend(["LDMSuperResolutionPipeline", "LDMSRPipelineCompact"])
     _import_structure["latent_diffusion_uncond"] = ["LDMPipeline"]
     _import_structure["pipeline_utils"] = ["AudioPipelineOutput", "DiffusionPipeline", "ImagePipelineOutput"]
     _import_structure["pndm"] = ["PNDMPipeline"]
