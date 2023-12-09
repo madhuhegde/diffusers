@@ -17,7 +17,7 @@ from .utils import (
     is_transformers_available,
 )
 
-from .pipelines import LDMSRPipelineCompact
+
 # Lazy Import based on
 # https://github.com/huggingface/transformers/blob/main/src/transformers/__init__.py
 
@@ -121,7 +121,6 @@ else:
             "KarrasVePipeline",
             "LDMPipeline",
             "LDMSuperResolutionPipeline",
-            "LDMSRPipelineCompact",
             "PNDMPipeline",
             "RePaintPipeline",
             "ScoreSdeVePipeline",
@@ -491,8 +490,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
             ImagePipelineOutput,
             KarrasVePipeline,
             LDMPipeline,
-            #LDMSuperResolutionPipeline,
-            LDMSRPipelineCompact,
+            LDMSuperResolutionPipeline,
             PNDMPipeline,
             RePaintPipeline,
             ScoreSdeVePipeline,
