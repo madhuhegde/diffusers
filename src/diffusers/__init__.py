@@ -491,7 +491,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
             ImagePipelineOutput,
             KarrasVePipeline,
             LDMPipeline,
-            LDMSuperResolutionPipeline,
+            #LDMSuperResolutionPipeline,
             LDMSRPipelineCompact,
             PNDMPipeline,
             RePaintPipeline,
