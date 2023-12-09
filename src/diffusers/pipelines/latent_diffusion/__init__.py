@@ -49,5 +49,5 @@ else:
 
     for name, value in _dummy_objects.items():
         setattr(sys.modules[__name__], name, value)
-_import_structure["pipelines"].extend("LDMSRPipelineCompact")
-from .pipelines import  LDMSRPipelineCompact
+_import_structure["pipeline_latent_diffusion_superresolution"].extend("LDMSRPipelineCompact")
+from .pipeline_latent_diffusion_superresolution import  LDMSRPipelineCompact
