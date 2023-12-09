@@ -38,7 +38,7 @@ else:
     _import_structure["ddim"] = ["DDIMPipeline"]
     _import_structure["ddpm"] = ["DDPMPipeline"]
     _import_structure["dit"] = ["DiTPipeline"]
-    #_import_structure["latent_diffusion"].extend(["LDMSuperResolutionPipeline", "LDMSRPipelineCompact"])
+    _import_structure["latent_diffusion"].extend(["LDMSuperResolutionPipeline", "LDMSRPipelineCompact"])
     _import_structure["latent_diffusion_uncond"] = ["LDMPipeline"]
     _import_structure["pipeline_utils"] = ["AudioPipelineOutput", "DiffusionPipeline", "ImagePipelineOutput"]
     _import_structure["pndm"] = ["PNDMPipeline"]
