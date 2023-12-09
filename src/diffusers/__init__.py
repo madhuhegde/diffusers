@@ -17,7 +17,7 @@ from .utils import (
     is_transformers_available,
 )
 
-
+from .pipelines import LDMSRPipelineCompact
 # Lazy Import based on
 # https://github.com/huggingface/transformers/blob/main/src/transformers/__init__.py
 
