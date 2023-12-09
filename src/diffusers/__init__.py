@@ -477,5 +477,4 @@ else:
     )
 _import_structure["pipelines"].extend("LDMSuperResolutionPipeline")
 from .pipelines import LDMSuperResolutionPipeline
-_import_structure["pipelines"].extend("LDMSRPipelineCompact")
-from .pipelines import LDMSuperResolutionPipeline, LDMSRPipelineCompact
+
