@@ -75,18 +75,7 @@ except OptionalDependencyNotAvailable:
 else:
     _import_structure["models"].extend(
         [
-            "AsymmetricAutoencoderKL",
-            "AutoencoderKL",
-            "AutoencoderTiny",
-            "ConsistencyDecoderVAE",
-            "ControlNetModel",
-            "Kandinsky3UNet",
-            "ModelMixin",
-            "MotionAdapter",
-            "MultiAdapter",
-            "PriorTransformer",
-            "T2IAdapter",
-            "T5FilmDecoder",
+           
             "Transformer2DModel",
             "UNet1DModel",
             "UNet2DConditionModel",
@@ -198,101 +187,8 @@ except OptionalDependencyNotAvailable:
 else:
     _import_structure["pipelines"].extend(
         [
-            "AltDiffusionImg2ImgPipeline",
-            "AltDiffusionPipeline",
-            "AnimateDiffPipeline",
-            "AudioLDM2Pipeline",
-            "AudioLDM2ProjectionModel",
-            "AudioLDM2UNet2DConditionModel",
-            "AudioLDMPipeline",
-            "BlipDiffusionControlNetPipeline",
-            "BlipDiffusionPipeline",
-            "CLIPImageProjection",
-            "CycleDiffusionPipeline",
-            "IFImg2ImgPipeline",
-            "IFImg2ImgSuperResolutionPipeline",
-            "IFInpaintingPipeline",
-            "IFInpaintingSuperResolutionPipeline",
-            "IFPipeline",
-            "IFSuperResolutionPipeline",
-            "ImageTextPipelineOutput",
-            "Kandinsky3Img2ImgPipeline",
-            "Kandinsky3Pipeline",
-            "KandinskyCombinedPipeline",
-            "KandinskyImg2ImgCombinedPipeline",
-            "KandinskyImg2ImgPipeline",
-            "KandinskyInpaintCombinedPipeline",
-            "KandinskyInpaintPipeline",
-            "KandinskyPipeline",
-            "KandinskyPriorPipeline",
-            "KandinskyV22CombinedPipeline",
-            "KandinskyV22ControlnetImg2ImgPipeline",
-            "KandinskyV22ControlnetPipeline",
-            "KandinskyV22Img2ImgCombinedPipeline",
-            "KandinskyV22Img2ImgPipeline",
-            "KandinskyV22InpaintCombinedPipeline",
-            "KandinskyV22InpaintPipeline",
-            "KandinskyV22Pipeline",
-            "KandinskyV22PriorEmb2EmbPipeline",
-            "KandinskyV22PriorPipeline",
-            "LatentConsistencyModelImg2ImgPipeline",
-            "LatentConsistencyModelPipeline",
-            "LDMTextToImagePipeline",
-            "MusicLDMPipeline",
-            "PaintByExamplePipeline",
-            "PixArtAlphaPipeline",
-            "SemanticStableDiffusionPipeline",
-            "ShapEImg2ImgPipeline",
-            "ShapEPipeline",
-            "StableDiffusionAdapterPipeline",
-            "StableDiffusionAttendAndExcitePipeline",
-            "StableDiffusionControlNetImg2ImgPipeline",
-            "StableDiffusionControlNetInpaintPipeline",
-            "StableDiffusionControlNetPipeline",
-            "StableDiffusionDepth2ImgPipeline",
-            "StableDiffusionDiffEditPipeline",
-            "StableDiffusionGLIGENPipeline",
-            "StableDiffusionGLIGENTextImagePipeline",
-            "StableDiffusionImageVariationPipeline",
-            "StableDiffusionImg2ImgPipeline",
-            "StableDiffusionInpaintPipeline",
-            "StableDiffusionInpaintPipelineLegacy",
-            "StableDiffusionInstructPix2PixPipeline",
-            "StableDiffusionLatentUpscalePipeline",
-            "StableDiffusionLDM3DPipeline",
-            "StableDiffusionModelEditingPipeline",
-            "StableDiffusionPanoramaPipeline",
-            "StableDiffusionParadigmsPipeline",
-            "StableDiffusionPipeline",
-            "StableDiffusionPipelineSafe",
-            "StableDiffusionPix2PixZeroPipeline",
-            "StableDiffusionSAGPipeline",
-            "StableDiffusionUpscalePipeline",
-            "StableDiffusionXLAdapterPipeline",
-            "StableDiffusionXLControlNetImg2ImgPipeline",
-            "StableDiffusionXLControlNetInpaintPipeline",
-            "StableDiffusionXLControlNetPipeline",
-            "StableDiffusionXLImg2ImgPipeline",
-            "StableDiffusionXLInpaintPipeline",
-            "StableDiffusionXLInstructPix2PixPipeline",
-            "StableDiffusionXLPipeline",
-            "StableUnCLIPImg2ImgPipeline",
-            "StableUnCLIPPipeline",
-            "TextToVideoSDPipeline",
-            "TextToVideoZeroPipeline",
-            "UnCLIPImageVariationPipeline",
-            "UnCLIPPipeline",
-            "UniDiffuserModel",
-            "UniDiffuserPipeline",
-            "UniDiffuserTextDecoder",
-            "VersatileDiffusionDualGuidedPipeline",
-            "VersatileDiffusionImageVariationPipeline",
-            "VersatileDiffusionPipeline",
-            "VersatileDiffusionTextToImagePipeline",
-            "VideoToVideoSDPipeline",
-            "VQDiffusionPipeline",
-            "WuerstchenCombinedPipeline",
-            "WuerstchenDecoderPipeline",
+           
+            
             "WuerstchenPriorPipeline",
         ]
     )
@@ -323,11 +219,7 @@ except OptionalDependencyNotAvailable:
 else:
     _import_structure["pipelines"].extend(
         [
-            "OnnxStableDiffusionImg2ImgPipeline",
-            "OnnxStableDiffusionInpaintPipeline",
-            "OnnxStableDiffusionInpaintPipelineLegacy",
-            "OnnxStableDiffusionPipeline",
-            "OnnxStableDiffusionUpscalePipeline",
+            
             "StableDiffusionOnnxPipeline",
         ]
     )
@@ -378,14 +270,7 @@ else:
     _import_structure["pipelines"].extend(["FlaxDiffusionPipeline"])
     _import_structure["schedulers"].extend(
         [
-            "FlaxDDIMScheduler",
-            "FlaxDDPMScheduler",
-            "FlaxDPMSolverMultistepScheduler",
-            "FlaxEulerDiscreteScheduler",
-            "FlaxKarrasVeScheduler",
-            "FlaxLMSDiscreteScheduler",
-            "FlaxPNDMScheduler",
-            "FlaxSchedulerMixin",
+          
             "FlaxScoreSdeVeScheduler",
         ]
     )
@@ -405,10 +290,7 @@ except OptionalDependencyNotAvailable:
 else:
     _import_structure["pipelines"].extend(
         [
-            "FlaxStableDiffusionControlNetPipeline",
-            "FlaxStableDiffusionImg2ImgPipeline",
-            "FlaxStableDiffusionInpaintPipeline",
-            "FlaxStableDiffusionPipeline",
+           
             "FlaxStableDiffusionXLPipeline",
         ]
     )
@@ -475,15 +357,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
             get_scheduler,
         )
         from .pipelines import (
-            AudioPipelineOutput,
-            AutoPipelineForImage2Image,
-            AutoPipelineForInpainting,
-            AutoPipelineForText2Image,
-            BlipDiffusionControlNetPipeline,
-            BlipDiffusionPipeline,
-            CLIPImageProjection,
-            ConsistencyModelPipeline,
-            DanceDiffusionPipeline,
+            
             DDIMPipeline,
             DDPMPipeline,
             DiffusionPipeline,
@@ -505,23 +379,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
             DDPMScheduler,
             DDPMWuerstchenScheduler,
             DEISMultistepScheduler,
-            DPMSolverMultistepInverseScheduler,
-            DPMSolverMultistepScheduler,
-            DPMSolverSinglestepScheduler,
-            EulerAncestralDiscreteScheduler,
-            EulerDiscreteScheduler,
-            HeunDiscreteScheduler,
-            IPNDMScheduler,
-            KarrasVeScheduler,
-            KDPM2AncestralDiscreteScheduler,
-            KDPM2DiscreteScheduler,
-            LCMScheduler,
-            PNDMScheduler,
-            RePaintScheduler,
-            SchedulerMixin,
-            ScoreSdeVeScheduler,
-            UnCLIPScheduler,
-            UniPCMultistepScheduler,
+           
             VQDiffusionScheduler,
         )
         from .training_utils import EMAModel
@@ -549,99 +407,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
         from .utils.dummy_torch_and_transformers_objects import *  # noqa F403
     else:
         from .pipelines import (
-            AltDiffusionImg2ImgPipeline,
-            AltDiffusionPipeline,
-            AnimateDiffPipeline,
-            AudioLDM2Pipeline,
-            AudioLDM2ProjectionModel,
-            AudioLDM2UNet2DConditionModel,
-            AudioLDMPipeline,
-            CLIPImageProjection,
-            CycleDiffusionPipeline,
-            IFImg2ImgPipeline,
-            IFImg2ImgSuperResolutionPipeline,
-            IFInpaintingPipeline,
-            IFInpaintingSuperResolutionPipeline,
-            IFPipeline,
-            IFSuperResolutionPipeline,
-            ImageTextPipelineOutput,
-            Kandinsky3Img2ImgPipeline,
-            Kandinsky3Pipeline,
-            KandinskyCombinedPipeline,
-            KandinskyImg2ImgCombinedPipeline,
-            KandinskyImg2ImgPipeline,
-            KandinskyInpaintCombinedPipeline,
-            KandinskyInpaintPipeline,
-            KandinskyPipeline,
-            KandinskyPriorPipeline,
-            KandinskyV22CombinedPipeline,
-            KandinskyV22ControlnetImg2ImgPipeline,
-            KandinskyV22ControlnetPipeline,
-            KandinskyV22Img2ImgCombinedPipeline,
-            KandinskyV22Img2ImgPipeline,
-            KandinskyV22InpaintCombinedPipeline,
-            KandinskyV22InpaintPipeline,
-            KandinskyV22Pipeline,
-            KandinskyV22PriorEmb2EmbPipeline,
-            KandinskyV22PriorPipeline,
-            LatentConsistencyModelImg2ImgPipeline,
-            LatentConsistencyModelPipeline,
-            LDMTextToImagePipeline,
-            MusicLDMPipeline,
-            PaintByExamplePipeline,
-            PixArtAlphaPipeline,
-            SemanticStableDiffusionPipeline,
-            ShapEImg2ImgPipeline,
-            ShapEPipeline,
-            StableDiffusionAdapterPipeline,
-            StableDiffusionAttendAndExcitePipeline,
-            StableDiffusionControlNetImg2ImgPipeline,
-            StableDiffusionControlNetInpaintPipeline,
-            StableDiffusionControlNetPipeline,
-            StableDiffusionDepth2ImgPipeline,
-            StableDiffusionDiffEditPipeline,
-            StableDiffusionGLIGENPipeline,
-            StableDiffusionGLIGENTextImagePipeline,
-            StableDiffusionImageVariationPipeline,
-            StableDiffusionImg2ImgPipeline,
-            StableDiffusionInpaintPipeline,
-            StableDiffusionInpaintPipelineLegacy,
-            StableDiffusionInstructPix2PixPipeline,
-            StableDiffusionLatentUpscalePipeline,
-            StableDiffusionLDM3DPipeline,
-            StableDiffusionModelEditingPipeline,
-            StableDiffusionPanoramaPipeline,
-            StableDiffusionParadigmsPipeline,
-            StableDiffusionPipeline,
-            StableDiffusionPipelineSafe,
-            StableDiffusionPix2PixZeroPipeline,
-            StableDiffusionSAGPipeline,
-            StableDiffusionUpscalePipeline,
-            StableDiffusionXLAdapterPipeline,
-            StableDiffusionXLControlNetImg2ImgPipeline,
-            StableDiffusionXLControlNetInpaintPipeline,
-            StableDiffusionXLControlNetPipeline,
-            StableDiffusionXLImg2ImgPipeline,
-            StableDiffusionXLInpaintPipeline,
-            StableDiffusionXLInstructPix2PixPipeline,
-            StableDiffusionXLPipeline,
-            StableUnCLIPImg2ImgPipeline,
-            StableUnCLIPPipeline,
-            TextToVideoSDPipeline,
-            TextToVideoZeroPipeline,
-            UnCLIPImageVariationPipeline,
-            UnCLIPPipeline,
-            UniDiffuserModel,
-            UniDiffuserPipeline,
-            UniDiffuserTextDecoder,
-            VersatileDiffusionDualGuidedPipeline,
-            VersatileDiffusionImageVariationPipeline,
-            VersatileDiffusionPipeline,
-            VersatileDiffusionTextToImagePipeline,
-            VideoToVideoSDPipeline,
-            VQDiffusionPipeline,
-            WuerstchenCombinedPipeline,
-            WuerstchenDecoderPipeline,
+            
             WuerstchenPriorPipeline,
         )
 
@@ -661,10 +427,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
     else:
         from .pipelines import (
             OnnxStableDiffusionImg2ImgPipeline,
-            OnnxStableDiffusionInpaintPipeline,
-            OnnxStableDiffusionInpaintPipelineLegacy,
-            OnnxStableDiffusionPipeline,
-            OnnxStableDiffusionUpscalePipeline,
+          
             StableDiffusionOnnxPipeline,
         )
 
@@ -696,14 +459,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
         from .models.vae_flax import FlaxAutoencoderKL
         from .pipelines import FlaxDiffusionPipeline
         from .schedulers import (
-            FlaxDDIMScheduler,
-            FlaxDDPMScheduler,
-            FlaxDPMSolverMultistepScheduler,
-            FlaxEulerDiscreteScheduler,
-            FlaxKarrasVeScheduler,
-            FlaxLMSDiscreteScheduler,
-            FlaxPNDMScheduler,
-            FlaxSchedulerMixin,
+            
             FlaxScoreSdeVeScheduler,
         )
 
@@ -714,10 +470,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
         from .utils.dummy_flax_and_transformers_objects import *  # noqa F403
     else:
         from .pipelines import (
-            FlaxStableDiffusionControlNetPipeline,
-            FlaxStableDiffusionImg2ImgPipeline,
-            FlaxStableDiffusionInpaintPipeline,
-            FlaxStableDiffusionPipeline,
+           
             FlaxStableDiffusionXLPipeline,
         )
 
