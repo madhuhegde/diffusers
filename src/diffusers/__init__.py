@@ -110,7 +110,7 @@ else:
             "ImagePipelineOutput",
             #"KarrasVePipeline",
             #"LDMPipeline",
-            #"LDMSuperResolutionPipeline",
+            "LDMSuperResolutionPipeline",
             #"PNDMPipeline",
             #"RePaintPipeline",
             #"ScoreSdeVePipeline",
@@ -327,18 +327,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
         from .utils.dummy_pt_objects import *  # noqa F403
     else:
         from .models import (
-            AsymmetricAutoencoderKL,
-            AutoencoderKL,
-            AutoencoderTiny,
-            ConsistencyDecoderVAE,
-            ControlNetModel,
-            Kandinsky3UNet,
-            ModelMixin,
-            MotionAdapter,
-            MultiAdapter,
-            PriorTransformer,
-            T2IAdapter,
-            T5FilmDecoder,
+          
             Transformer2DModel,
             UNet1DModel,
             UNet2DConditionModel,
@@ -371,13 +360,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
             ScoreSdeVePipeline,
         )
         from .schedulers import (
-            CMStochasticIterativeScheduler,
-            DDIMInverseScheduler,
-            DDIMParallelScheduler,
-            DDIMScheduler,
-            DDPMParallelScheduler,
-            DDPMScheduler,
-            DDPMWuerstchenScheduler,
+            
             DEISMultistepScheduler,
            
             VQDiffusionScheduler,
@@ -492,3 +475,5 @@ else:
         module_spec=__spec__,
         extra_objects={"__version__": __version__},
     )
+_import_structure["pipelines"].extend("LDMSuperResolutionPipeline")
+from .pipelines import LDMSuperResolutionPipeline
