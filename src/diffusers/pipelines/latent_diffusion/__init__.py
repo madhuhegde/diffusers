@@ -38,7 +38,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
     else:
         from .pipeline_latent_diffusion import LDMBertModel, LDMTextToImagePipeline
         from .pipeline_latent_diffusion_superresolution import LDMSRPipelineCompact
-        from .pipeline_latent_diffusion_superresolution import LDMSuperResolutionPipeline
+        #from .pipeline_latent_diffusion_superresolution import LDMSuperResolutionPipeline
 
 
 else:
