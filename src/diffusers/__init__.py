@@ -49,7 +49,8 @@ _import_structure = {
         "logging",
     ],
 }
-
+_import_structure["pipelines"].extend("LDMSuperResolutionPipeline")
+from .pipelines import LDMSuperResolutionPipeline
 try:
     if not is_onnx_available():
         raise OptionalDependencyNotAvailable()
@@ -107,23 +108,23 @@ else:
     ]
     _import_structure["pipelines"].extend(
         [
-            "AudioPipelineOutput",
-            "AutoPipelineForImage2Image",
-            "AutoPipelineForInpainting",
-            "AutoPipelineForText2Image",
-            "ConsistencyModelPipeline",
-            "DanceDiffusionPipeline",
+            #"AudioPipelineOutput",
+            #"AutoPipelineForImage2Image",
+            #"AutoPipelineForInpainting",
+            #"AutoPipelineForText2Image",
+            #"ConsistencyModelPipeline",
+            #"DanceDiffusionPipeline",
             "DDIMPipeline",
             "DDPMPipeline",
             "DiffusionPipeline",
             "DiTPipeline",
             "ImagePipelineOutput",
-            "KarrasVePipeline",
-            "LDMPipeline",
-            "LDMSuperResolutionPipeline",
-            "PNDMPipeline",
-            "RePaintPipeline",
-            "ScoreSdeVePipeline",
+            #"KarrasVePipeline",
+            #"LDMPipeline",
+            #"LDMSuperResolutionPipeline",
+            #"PNDMPipeline",
+            #"RePaintPipeline",
+            #"ScoreSdeVePipeline",
         ]
     )
     _import_structure["schedulers"].extend(
@@ -136,24 +137,24 @@ else:
             "DDPMScheduler",
             "DDPMWuerstchenScheduler",
             "DEISMultistepScheduler",
-            "DPMSolverMultistepInverseScheduler",
-            "DPMSolverMultistepScheduler",
-            "DPMSolverSinglestepScheduler",
-            "EulerAncestralDiscreteScheduler",
-            "EulerDiscreteScheduler",
-            "HeunDiscreteScheduler",
-            "IPNDMScheduler",
-            "KarrasVeScheduler",
-            "KDPM2AncestralDiscreteScheduler",
-            "KDPM2DiscreteScheduler",
-            "LCMScheduler",
-            "PNDMScheduler",
-            "RePaintScheduler",
-            "SchedulerMixin",
-            "ScoreSdeVeScheduler",
-            "UnCLIPScheduler",
-            "UniPCMultistepScheduler",
-            "VQDiffusionScheduler",
+            #"DPMSolverMultistepInverseScheduler",
+            #"DPMSolverMultistepScheduler",
+            #"DPMSolverSinglestepScheduler",
+            #"EulerAncestralDiscreteScheduler",
+            #"EulerDiscreteScheduler",
+            #"HeunDiscreteScheduler",
+            #"IPNDMScheduler",
+            #"KarrasVeScheduler",
+            #"KDPM2AncestralDiscreteScheduler",
+            #"KDPM2DiscreteScheduler",
+            #"LCMScheduler",
+            #"PNDMScheduler",
+            #"RePaintScheduler",
+            #"SchedulerMixin",
+            #"ScoreSdeVeScheduler",
+            #"UnCLIPScheduler",
+            #"UniPCMultistepScheduler",
+            #"VQDiffusionScheduler",
         ]
     )
     _import_structure["training_utils"] = ["EMAModel"]
