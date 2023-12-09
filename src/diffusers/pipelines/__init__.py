@@ -14,8 +14,7 @@ from ..utils import (
     is_transformers_available,
 )
 
-_import_structure["latent_diffusion"].extend(["LDMSuperResolutionPipeline"])
-from .latent_diffusion import LDMSuperResolutionPipeline
+
 # These modules contain pipelines from multiple libraries/frameworks
 _dummy_objects = {}
 _import_structure = {
@@ -25,7 +24,8 @@ _import_structure = {
     "stable_diffusion": [],
     "stable_diffusion_xl": [],
 }
-
+_import_structure["latent_diffusion"].extend(["LDMSuperResolutionPipeline"])
+from .latent_diffusion import LDMSuperResolutionPipeline
 try:
     if not is_torch_available():
         raise OptionalDependencyNotAvailable()
