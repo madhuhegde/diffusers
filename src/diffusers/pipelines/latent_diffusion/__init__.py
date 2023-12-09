@@ -14,7 +14,7 @@ _dummy_objects = {}
 _import_structure = {}
 
 from .pipeline_latent_diffusion_superresolution import LDMSRPipelineCompact
-from .pipeline_latent_diffusion_superresolution import LDMSuperResolutionPipeline
+#from .pipeline_latent_diffusion_superresolution import LDMSuperResolutionPipeline
 
 try:
     if not (is_transformers_available() and is_torch_available()):
