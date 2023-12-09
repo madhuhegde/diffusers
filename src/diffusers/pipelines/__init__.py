@@ -13,7 +13,8 @@ from ..utils import (
     is_torch_available,
     is_transformers_available,
 )
-from .latent_diffusion import LDMSuperResolutionPipeline, LDMSRPipelineCompact
+#from .latent_diffusion import LDMSuperResolutionPipeline
+from .latent_diffusion import LDMSRPipelineCompact
 
 # These modules contain pipelines from multiple libraries/frameworks
 _dummy_objects = {}
