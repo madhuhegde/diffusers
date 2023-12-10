@@ -30,7 +30,7 @@ def preprocess(image):
     return 2.0 * image - 1.0
 
 
-class LDMSuperResolutionPipeline(DiffusionPipeline):
+class LDMSuperResolutionPipelineNew(DiffusionPipeline):
     r"""
     A pipeline for image super-resolution using latent diffusion.
 
@@ -154,7 +154,7 @@ class LDMSuperResolutionPipeline(DiffusionPipeline):
 
         return ImagePipelineOutput(images=image)
 
-class LDMSuperResolutionPipelineOld(DiffusionPipeline):
+class LDMSuperResolutionPipeline(DiffusionPipeline):
     r"""
     A pipeline for image super-resolution using latent diffusion.
 
