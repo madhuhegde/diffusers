@@ -9,11 +9,6 @@ import torch.utils.checkpoint
 from ...models import UNet2DModel, VQModel
 from ...schedulers import (
     DDIMScheduler,
-    DPMSolverMultistepScheduler,
-    EulerAncestralDiscreteScheduler,
-    EulerDiscreteScheduler,
-    LMSDiscreteScheduler,
-    PNDMScheduler,
 )
 from ...utils import PIL_INTERPOLATION
 from ...utils.torch_utils import randn_tensor
@@ -22,8 +17,8 @@ from ..pipeline_utils import DiffusionPipeline, ImagePipelineOutput
 
 def preprocess(image):
     w, h = image.size
-    w, h = (x - x % 32 for x in (w, h))  # resize to integer multiple of 32
-    image = image.resize((w, h), resample=PIL_INTERPOLATION["lanczos"])
+    #w, h = (x - x % 32 for x in (w, h))  # resize to integer multiple of 32
+    #image = image.resize((w, h), resample=PIL_INTERPOLATION["lanczos"])
     image = np.array(image).astype(np.float32) / 255.0
     image = image[None].transpose(0, 3, 1, 2)
     image = torch.from_numpy(image)
@@ -176,14 +171,7 @@ class LDMSuperResolutionPipeline(DiffusionPipeline):
         self,
         vqvae: VQModel,
         unet: UNet2DModel,
-        scheduler: Union[
-            DDIMScheduler,
-            PNDMScheduler,
-            LMSDiscreteScheduler,
-            EulerDiscreteScheduler,
-            EulerAncestralDiscreteScheduler,
-            DPMSolverMultistepScheduler,
-        ],
+        scheduler: DDIMScheduler,
     ):
         super().__init__()
         self.register_modules(vqvae=vqvae, unet=unet, scheduler=scheduler)
