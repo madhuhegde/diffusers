@@ -89,10 +89,10 @@ else:
             #"T5FilmDecoder",
             #"Transformer2DModel",
             #"UNet1DModel",
-            "UNet2DConditionModel",
+            #"UNet2DConditionModel",
             "UNet2DModel",
             #"UNet3DConditionModel",
-            "UNetMotionModel",
+            #"UNetMotionModel",
             "VQModel",
         ]
     )
@@ -133,7 +133,7 @@ else:
             #"DDIMInverseScheduler",
             #"DDIMParallelScheduler",
             "DDIMScheduler",
-            "DDPMParallelScheduler",
+            #"DDPMParallelScheduler",
             "DDPMScheduler",
             #"DDPMWuerstchenScheduler",
             #"DEISMultistepScheduler",
@@ -154,7 +154,7 @@ else:
             #"ScoreSdeVeScheduler",
             #"UnCLIPScheduler",
             #"UniPCMultistepScheduler",
-            "VQDiffusionScheduler",
+            #"VQDiffusionScheduler",
         ]
     )
     _import_structure["training_utils"] = ["EMAModel"]
@@ -182,7 +182,7 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
            
             ModelMixin,
             UNet2DModel,
-            UNet3DConditionModel,
+            #UNet3DConditionModel,
             VQModel,
         )
         from .optimization import (
@@ -206,12 +206,12 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
         from .schedulers import (
            
             DDIMScheduler,
-            DDPMParallelScheduler,
+            #DDPMParallelScheduler,
             DDPMScheduler,
             SchedulerMixin,
-            VQDiffusionScheduler,
+            #VQDiffusionScheduler,
         )
-        from .training_utils import EMAModel
+        #from .training_utils import EMAModel
     
 else:
 #if 0:
