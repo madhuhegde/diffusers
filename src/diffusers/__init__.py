@@ -114,8 +114,8 @@ else:
             #"AutoPipelineForText2Image",
             #"ConsistencyModelPipeline",
             #"DanceDiffusionPipeline",
-            "DDIMPipeline",
-            "DDPMPipeline",
+            #"DDIMPipeline",
+            #"DDPMPipeline",
             "DiffusionPipeline",
             #"DiTPipeline",
             #"ImagePipelineOutput",
@@ -157,7 +157,7 @@ else:
             #"VQDiffusionScheduler",
         ]
     )
-    _import_structure["training_utils"] = ["EMAModel"]
+    #_import_structure["training_utils"] = ["EMAModel"]
 
 
  
@@ -196,8 +196,8 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
         )
         from .pipelines import (
            
-            DDIMPipeline,
-            DDPMPipeline,
+            #DDIMPipeline,
+            #DDPMPipeline,
             DiffusionPipeline,
            
             LDMSuperResolutionPipeline,

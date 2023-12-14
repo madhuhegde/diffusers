@@ -25,7 +25,7 @@ def preprocess(image):
     return 2.0 * image - 1.0
 
 
-class LDMSuperResolutionPipelineNew(DiffusionPipeline):
+class LDMSuperResolutionPipeline(DiffusionPipeline):
     r"""
     A pipeline for image super-resolution using latent diffusion.
 
@@ -52,8 +52,26 @@ class LDMSuperResolutionPipelineNew(DiffusionPipeline):
 
         vqvae = VQModel(in_channels=3,out_channels=3,down_block_types=['DownEncoderBlock2D', 'DownEncoderBlock2D', 'DownEncoderBlock2D'],up_block_types=['UpDecoderBlock2D', 'UpDecoderBlock2D', 'UpDecoderBlock2D'], block_out_channels=[128, 256, 512], layers_per_block=2, act_fn='silu', latent_channels=3, sample_size=256,num_vq_embeddings=8192, norm_num_groups=32, vq_embed_dim =3,scaling_factor=0.18215,norm_type='group')
         #vqvae = VQModel(in_channels=3,out_channels=3,down_block_types=['DownEncoderBlock2D', 'DownEncoderBlock2D', 'DownEncoderBlock2D'],up_block_types=['UpDecoderBlock2D', 'UpDecoderBlock2D', 'UpDecoderBlock2D'], block_out_channels=[64, 128, 256], layers_per_block=2, act_fn='silu', latent_channels=3, sample_size=256,num_vq_embeddings=2048, norm_num_groups=32, vq_embed_dim =3,scaling_factor=0.18215,norm_type='group')
-        self.register_modules(vqvae=vqvae)
-             
+        unet = UNet2DModel(sample_size=64, in_channels=6,out_channels=3, center_input_sample=False,time_embedding_type='positional',freq_shift=0,flip_sin_to_cos=True, down_block_types=['DownBlock2D', 'DownBlock2D', 'DownBlock2D', 'AttnDownBlock2D'],up_block_types=['AttnUpBlock2D', 'UpBlock2D', 'UpBlock2D', 'UpBlock2D'], block_out_channels=[160, 320, 320, 640],layers_per_block=2,mid_block_scale_factor=1,downsample_padding=1,downsample_type='conv',upsample_type='conv',dropout=0.0,act_fn='silu', attention_head_dim=32,norm_num_groups=32,attn_norm_num_groups=None,norm_eps=1e-05,resnet_time_scale_shift='default',add_attention=True,class_embed_type=None,num_class_embeds=None,num_train_timesteps=None)
+        scheduler = DDIMScheduler(num_train_timesteps = 1000,
+                                  beta_start = 0.0015,
+                                  beta_end = 0.015,
+                                  beta_schedule ="scaled_linear",
+                                  trained_betas = None,
+                                  clip_sample = False,
+                                  set_alpha_to_one = True,
+                                  steps_offset = 1,
+                                  prediction_type = "epsilon",
+                                  thresholding = False,
+                                  dynamic_thresholding_ratio = 0.995,
+                                  clip_sample_range = 1.0,
+                                  sample_max_value = 1.0,
+                                  timestep_spacing = "leading",
+                                  rescale_betas_zero_snr = False,
+                    )
+        self.register_modules(vqvae=vqvae, unet=unet, scheduler=scheduler)
+        print(f"scheduler : {scheduler}")
+        
 
     @torch.no_grad()
     def __call__(
@@ -90,30 +108,7 @@ class LDMSuperResolutionPipelineNew(DiffusionPipeline):
 
         Example:
 
-        ```py
-        >>> import requests
-        >>> from PIL import Image
-        >>> from io import BytesIO
-        >>> from diffusers import LDMSuperResolutionPipeline
-        >>> import torch
-
-        >>> # load model and scheduler
-        >>> pipeline = LDMSuperResolutionPipeline.from_pretrained("CompVis/ldm-super-resolution-4x-openimages")
-        >>> pipeline = pipeline.to("cuda")
-
-        >>> # let's download an  image
-        >>> url = (
-        ...     "https://user-images.githubusercontent.com/38061659/199705896-b48e17b8-b231-47cd-a270-4ffa5a93fa3e.png"
-        ... )
-        >>> response = requests.get(url)
-        >>> low_res_img = Image.open(BytesIO(response.content)).convert("RGB")
-        >>> low_res_img = low_res_img.resize((128, 128))
-
-        >>> # run pipeline in inference (sample random noise and denoise)
-        >>> upscaled_image = pipeline(low_res_img, num_inference_steps=100, eta=1).images[0]
-        >>> # save image
-        >>> upscaled_image.save("ldm_generated_image.png")
-        ```
+       
 
         Returns:
             [`~pipelines.ImagePipelineOutput`] or `tuple`:
@@ -132,11 +127,41 @@ class LDMSuperResolutionPipelineNew(DiffusionPipeline):
 
         height, width = image.shape[-2:]
 
-        image = image.to(device=self.device)
+        # in_channels should be 6: 3 for latents, 3 for low resolution image
+        latents_shape = (batch_size, self.unet.config.in_channels // 2, height, width)
+        latents_dtype = next(self.unet.parameters()).dtype
 
-       
+        latents = randn_tensor(latents_shape, generator=generator, device=self.device, dtype=latents_dtype)
+
+        image = image.to(device=self.device, dtype=latents_dtype)
+
+        # set timesteps and move to the correct device
+        self.scheduler.set_timesteps(num_inference_steps, device=self.device)
+        timesteps_tensor = self.scheduler.timesteps
+
+        # scale the initial noise by the standard deviation required by the scheduler
+        latents = latents * self.scheduler.init_noise_sigma
+
+        # prepare extra kwargs for the scheduler step, since not all schedulers have the same signature.
+        # eta (η) is only used with the DDIMScheduler, it will be ignored for other schedulers.
+        # eta corresponds to η in DDIM paper: https://arxiv.org/abs/2010.02502
+        # and should be between [0, 1]
+        accepts_eta = "eta" in set(inspect.signature(self.scheduler.step).parameters.keys())
+        extra_kwargs = {}
+        if accepts_eta:
+            extra_kwargs["eta"] = eta
+
+        for t in self.progress_bar(timesteps_tensor):
+            # concat latents and low resolution image in the channel dimension.
+            latents_input = torch.cat([latents, image], dim=1)
+            latents_input = self.scheduler.scale_model_input(latents_input, t)
+            # predict the noise residual
+            noise_pred = self.unet(latents_input, t).sample
+            # compute the previous noisy sample x_t -> x_t-1
+            latents = self.scheduler.step(noise_pred, t, latents, **extra_kwargs).prev_sample
+
         # decode the image latents with the VQVAE
-        image = self.vqvae(image).sample
+        image = self.vqvae.decode(latents).sample
         image = torch.clamp(image, -1.0, 1.0)
         image = image / 2 + 0.5
         image = image.cpu().permute(0, 2, 3, 1).numpy()
@@ -149,7 +174,10 @@ class LDMSuperResolutionPipelineNew(DiffusionPipeline):
 
         return ImagePipelineOutput(images=image)
 
-class LDMSuperResolutionPipeline(DiffusionPipeline):
+        
+   
+
+class LDMSuperResolutionPipelineOrg(DiffusionPipeline):
     r"""
     A pipeline for image super-resolution using latent diffusion.
 
