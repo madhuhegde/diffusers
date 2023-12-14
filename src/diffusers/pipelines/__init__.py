@@ -36,8 +36,8 @@ except OptionalDependencyNotAvailable:
 else:
     
     
-    _import_structure["ddim"] = ["DDIMPipeline"]
-    _import_structure["ddpm"] = ["DDPMPipeline"]
+    #_import_structure["ddim"] = ["DDIMPipeline"]
+    #_import_structure["ddpm"] = ["DDPMPipeline"]
    
     _import_structure["latent_diffusion"].extend(["LDMSuperResolutionPipeline"])
     
@@ -57,8 +57,8 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
 
     else:
         
-        from .ddim import DDIMPipeline
-        from .ddpm import DDPMPipeline
+        #from .ddim import DDIMPipeline
+        #from .ddpm import DDPMPipeline
         from .latent_diffusion import LDMSuperResolutionPipeline
         from .latent_diffusion_uncond import LDMPipeline
         from .pipeline_utils import (

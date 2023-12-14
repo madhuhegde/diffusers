@@ -75,24 +75,9 @@ except OptionalDependencyNotAvailable:
 else:
     _import_structure["models"].extend(
         [
-            #"AsymmetricAutoencoderKL",
-            #"AutoencoderKL",
-            #"AutoencoderTiny",
-            #"ConsistencyDecoderVAE",
-            #"ControlNetModel",
-            #"Kandinsky3UNet",
+           
             "ModelMixin",
-            #"MotionAdapter",
-            #"MultiAdapter",
-            #"PriorTransformer",
-            #"T2IAdapter",
-            #"T5FilmDecoder",
-            #"Transformer2DModel",
-            #"UNet1DModel",
-            #"UNet2DConditionModel",
-            "UNet2DModel",
-            #"UNet3DConditionModel",
-            #"UNetMotionModel",
+            "UNet2DModel",   
             "VQModel",
         ]
     )
@@ -108,57 +93,24 @@ else:
     ]
     _import_structure["pipelines"].extend(
         [
-            #"AudioPipelineOutput",
-            #"AutoPipelineForImage2Image",
-            #"AutoPipelineForInpainting",
-            #"AutoPipelineForText2Image",
-            #"ConsistencyModelPipeline",
-            #"DanceDiffusionPipeline",
-            #"DDIMPipeline",
-            #"DDPMPipeline",
+            
             "DiffusionPipeline",
-            #"DiTPipeline",
-            #"ImagePipelineOutput",
-            #"KarrasVePipeline",
-            #"LDMPipeline",
             "LDMSuperResolutionPipeline",
-            #"PNDMPipeline",
-            #"RePaintPipeline",
-            #"ScoreSdeVePipeline",
+            
         ]
     )
     _import_structure["schedulers"].extend(
         [
-            #"CMStochasticIterativeScheduler",
-            #"DDIMInverseScheduler",
-            #"DDIMParallelScheduler",
+            
             "DDIMScheduler",
-            #"DDPMParallelScheduler",
+            
             "DDPMScheduler",
-            #"DDPMWuerstchenScheduler",
-            #"DEISMultistepScheduler",
-            #"DPMSolverMultistepInverseScheduler",
-            #"DPMSolverMultistepScheduler",
-            #"DPMSolverSinglestepScheduler",
-            #"EulerAncestralDiscreteScheduler",
-            #"EulerDiscreteScheduler",
-            #"HeunDiscreteScheduler",
-            #"IPNDMScheduler",
-            #"KarrasVeScheduler",
-            #"KDPM2AncestralDiscreteScheduler",
-            #"KDPM2DiscreteScheduler",
-            #"LCMScheduler",
-            #"PNDMScheduler",
-            #"RePaintScheduler",
+           
             "SchedulerMixin",
-            #"ScoreSdeVeScheduler",
-            #"UnCLIPScheduler",
-            #"UniPCMultistepScheduler",
-            #"VQDiffusionScheduler",
+            
         ]
     )
-    #_import_structure["training_utils"] = ["EMAModel"]
-
+    
 
  
 if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
@@ -196,8 +148,6 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
         )
         from .pipelines import (
            
-            #DDIMPipeline,
-            #DDPMPipeline,
             DiffusionPipeline,
            
             LDMSuperResolutionPipeline,
@@ -206,12 +156,12 @@ if TYPE_CHECKING or DIFFUSERS_SLOW_IMPORT:
         from .schedulers import (
            
             DDIMScheduler,
-            #DDPMParallelScheduler,
+           
             DDPMScheduler,
             SchedulerMixin,
-            #VQDiffusionScheduler,
+           
         )
-        #from .training_utils import EMAModel
+       
     
 else:
 #if 0:
