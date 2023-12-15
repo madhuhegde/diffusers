@@ -21,7 +21,7 @@ from torch import einsum, nn
 from ..utils import USE_PEFT_BACKEND, deprecate, logging
 from ..utils.import_utils import is_xformers_available
 from ..utils.torch_utils import maybe_allow_in_graph
-from .lora import LoRACompatibleLinear, LoRALinearLayer
+#from .lora import LoRACompatibleLinear, LoRALinearLayer
 
 
 logger = logging.get_logger(__name__)  # pylint: disable=invalid-name
@@ -173,7 +173,7 @@ class Attention(nn.Module):
                 f"unknown cross_attention_norm: {cross_attention_norm}. Should be None, 'layer_norm' or 'group_norm'"
             )
 
-        if USE_PEFT_BACKEND:
+        if 1: #USE_PEFT_BACKEND:
             linear_cls = nn.Linear
         else:
             linear_cls = LoRACompatibleLinear
@@ -707,7 +707,7 @@ class AttnProcessor:
     ) -> torch.Tensor:
         residual = hidden_states
 
-        args = () if USE_PEFT_BACKEND else (scale,)
+        args = () #if USE_PEFT_BACKEND else (scale,)
 
         if attn.spatial_norm is not None:
             hidden_states = attn.spatial_norm(hidden_states, temb)
@@ -1207,7 +1207,7 @@ class AttnProcessor2_0:
         if attn.group_norm is not None:
             hidden_states = attn.group_norm(hidden_states.transpose(1, 2)).transpose(1, 2)
 
-        args = () if USE_PEFT_BACKEND else (scale,)
+        args = ()# if USE_PEFT_BACKEND else (scale,)
         query = attn.to_q(hidden_states, *args)
 
         if encoder_hidden_states is None:
