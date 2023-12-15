@@ -21,6 +21,7 @@ from torch import nn
 from ..utils import is_torch_version, logging
 from ..utils.torch_utils import apply_freeu
 from .activations import get_activation
+
 from .attention_processor import Attention
 from .normalization import AdaGroupNorm
 from .resnet import Downsample2D, ResnetBlock2D, Upsample2D
